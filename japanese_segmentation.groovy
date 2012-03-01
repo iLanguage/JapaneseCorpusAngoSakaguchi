@@ -22,6 +22,15 @@ while ( (line = sourcefile.readLine()  )  != null ){
 println text
 
  def frequency=[:]
+ 
+ /*
+ 
+ Phase 1:
+ Insert a space after all characters that indicate a word (or morpheme) boundary
+ 
+ */
+ 
+ 
  /* Segment on punctuation */
  def preprocessedtext=text.replaceAll(/[(;|,|\n)。、?!「」]/," ")
  def hiragana = "ぁ-ゖ"
@@ -30,7 +39,17 @@ println text
  preprocessedtext=preprocessedtext.replaceAll(/[^ぁ-ゖ゛-ヿ][^ぁ-ゖ゛-ヿ][のはが]/,/$0 /)
  /* segment on accusative marker */
  preprocessedtext=preprocessedtext.replaceAll(/を/,/$0 /)
+/* segment on locative followed by a chinese character */
+ preprocessedtext=preprocessedtext.replaceAll(/[にへで][^ぁ-ゖ゛-ヿ]/,/$0 /)
+
  
+ 
+ /*
+ 
+ Phase 2:
+ Tokenize on white space, just as we would do in English
+ 
+ */
  
  def preprocessedsplit=preprocessedtext.split()
  

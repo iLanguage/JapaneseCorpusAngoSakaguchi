@@ -11,15 +11,25 @@ def text='''伊豆の伊東にヒロポン屋というものが存在してい�
 　織田作之助はヒロポン注射が得意で、酒席で、にわかに腕をまくりあげてヒロポンをうつ。当時の流行の尖端だから、ひとつは見栄だろう。今のように猫もシャクシもやるようになっては、彼もやる気がしなかったかも知れぬ。
 　織田はヒロポンの注射をうつと、ビタミンＢをうち、救心をのんでいた。今でもこの風俗は同じことで、ヒロポン・ビタミン・救心。妙な信仰だ。しかし、今の中毒患者はヒロポン代で精一パイだから、信仰は残っているが、めったに実行はされない。
  '''
+text =""
+InputStreamReader sourcefile = new InputStreamReader(new FileInputStream("corpus/ango1.txt"),"UTF-8");
+while ( (line = sourcefile.readLine()  )  != null ){
+
+   if (line != null){
+       text=text+"\n"+line
+   }
+}
+println text
+
  def frequency=[:]
  def preprocessedtext=text.replaceAll(/[(;|,|\n)。、?!「」]/," ")
- preprocessedtext=text.replaceAll(/がを葉にでの/,"& ")
- preprocessedtext=text.replaceAll(/[(;|,|\n\t )。、?!「」]/," ")
+ preprocessedtext=preprocessedtext.replaceAll(/の/,/$0 /)
+//preprocessedtext=preprocessedtext.replaceAll(/[(;|,|\n\t )。、?!「」]/," ")
  
  def preprocessedsplit=preprocessedtext.split()
  
 for(word in preprocessedsplit){ 
-        println "this is a word"+word
+  println "this is a word"+word
 
 
 } 

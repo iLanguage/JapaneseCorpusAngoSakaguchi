@@ -22,9 +22,14 @@ while ( (line = sourcefile.readLine()  )  != null ){
 println text
 
  def frequency=[:]
+ /* Segment on punctuation */
  def preprocessedtext=text.replaceAll(/[(;|,|\n)。、?!「」]/," ")
- preprocessedtext=preprocessedtext.replaceAll(/の/,/$0 /)
-//preprocessedtext=preprocessedtext.replaceAll(/[(;|,|\n\t )。、?!「」]/," ")
+ def hiragana = "ぁ-ゖ"
+ def katakana = "゛-ヿ"
+ /* Segment on two characters (that are not hiragana or katakana) followed by suffixes */
+ preprocessedtext=preprocessedtext.replaceAll(/[^ぁ-ゖ゛-ヿ][^ぁ-ゖ゛-ヿ][のはをが]/,/$0 /)
+ 
+ 
  
  def preprocessedsplit=preprocessedtext.split()
  

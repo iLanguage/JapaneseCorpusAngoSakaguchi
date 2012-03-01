@@ -27,8 +27,9 @@ println text
  def hiragana = "ぁ-ゖ"
  def katakana = "゛-ヿ"
  /* Segment on two characters (that are not hiragana or katakana) followed by suffixes */
- preprocessedtext=preprocessedtext.replaceAll(/[^ぁ-ゖ゛-ヿ][^ぁ-ゖ゛-ヿ][のはをが]/,/$0 /)
- 
+ preprocessedtext=preprocessedtext.replaceAll(/[^ぁ-ゖ゛-ヿ][^ぁ-ゖ゛-ヿ][のはが]/,/$0 /)
+ /* segment on accusative marker */
+ preprocessedtext=preprocessedtext.replaceAll(/を/,/$0 /)
  
  
  def preprocessedsplit=preprocessedtext.split()

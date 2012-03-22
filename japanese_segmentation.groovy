@@ -52,9 +52,26 @@ println text
  */
  
  def preprocessedsplit=preprocessedtext.split()
- 
+
+
 for(word in preprocessedsplit){ 
   println "this is a word"+word
-
-
 } 
+/* print them in rhyming order */
+def backwardsWordsMap = [:]
+for(def i = 0; i < preprocessedsplit.size(); i++){
+ //reverse the word and save it into the new map for backwards words, keeping its old value
+    backwardsWordsMap[preprocessedsplit[i].reverse()] = 0
+}
+backwardsWordsMap.entrySet().sort {
+        //this time, take two entries, and just compare their key (ie, the words aphabetically)
+        a,b ->  a.key <=> b.key
+    }.each{
+        sortedItem ->
+            /*
+            Here we do what we want with the sorted item,
+            In this case we print it out, but we are sure to reverse it when we print so that it comes out human-readable (instead of backwards)
+            */
+           print "${sortedItem.value}\t ${sortedItem.key.reverse()}\n"
+
+}
